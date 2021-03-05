@@ -1,0 +1,36 @@
+<div class="container" style="margin-top: 30px;">
+    <div class="row" style="width:  100%;;margin: 0px auto;">
+        <div class="col-sm-6">
+            <div>
+                <button class="mybtn">Add</button>
+                <button class="mybtn">Search</button>
+            </div>
+        </div>
+        <div class="col-sm-6" style="text-align: end;padding-right: 25px;">
+            {{page}}
+        </div>
+    </div>
+    <div class="row">
+        <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email ID</th>
+                <th>Mobile Number</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of llist;let index = i;">
+                <td>{{item.name}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.mobile}}</td>
+                <td>{{item.state}}</td>
+                <td>Actions</td>
+              </tr>
+            </tbody>
+          </table>
+      
+    </div>
+</div>
