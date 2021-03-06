@@ -1,5 +1,19 @@
-<div class="container">  
-    <form id="contact" action="#" method="post">
+<div class="container" style="margin-top:  20px;">  
+
+    <div class="row" style="width:  100%;;margin: 0px auto;">
+      <div class="col-sm-6">
+          <div>
+              <button class="mybtn" (click)='back()'>Back</button>
+              <button class="mybtn" (click)='home()'>Home</button>
+              <button *ngIf="this.isview == 1" class="mybtn" (click)="edit()">Edit</button>
+          </div>
+      </div>
+      <div class="col-sm-6" style="text-align: end;padding-right: 25px;">
+          
+      </div>
+  </div>
+
+    <div id="contact" action="#" method="post" *ngIf="this.isview == 0">
       <h3>Add User Deetails</h3>
       <fieldset>
         <input placeholder="Your name" type="text" tabindex="1" [(ngModel)]="name" required autofocus>
@@ -17,7 +31,10 @@
         <input placeholder="Your Date Of Birth " type="date" tabindex="4" required [(ngModel)]="dob">
       </fieldset>
       <fieldset>
-        <input placeholder="Your Photo" type="file" tabindex="4" required [(ngModel)]="name">
+        <input placeholder="Your Photo" type="file" tabindex="4" required 
+          #fileInput (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)"
+          (change)="uploadFile($event.target.files)">
+          <img src="{{imagesrc}}" width="50px" height="50px" *ngIf="this.imagesrc != ''" />
       </fieldset>
       <fieldset>
         <textarea placeholder="Type your address here...." tabindex="5" required name="address"  [(ngModel)]="address">{{address}}</textarea>
@@ -32,8 +49,63 @@
         <input placeholder="Your Country" type="text" tabindex="1" required [(ngModel)]="country">
       </fieldset>
       <fieldset>
-        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" (click)="save()">Submit</button>
       </fieldset>
+    </div>
+    <div *ngIf="this.isview == 1" id="contact">
+      <h3>User Deetails</h3>
+      <table >
+        <tr>
+          <td>Name </td>
+          
+          <td>{{name}}</td>
+        </tr>
+        <tr>
+          <td>Username  </td>
+          
+          <td>{{username}}</td>
+        </tr>
+        <tr>
+          <td>Email  </td>
+          
+          <td>{{email}}</td>
+        </tr>
+        <tr>
+          <td>Phone Number </td>
+          
+          <td>{{mobile}}</td>
+        </tr>
+        <tr>
+          <td>Date Of Birth </td>
+          
+          <td>{{dob}}</td>
+        </tr>
+        <tr>
+          <td>Profile Picture  </td>
+          
+          <td> <img src="{{imagesrc}}" width="50px" height="50px" *ngIf="this.imagesrc != ''" /></td>
+        </tr>
+        <tr>
+          <td>Address  </td>
+          
+          <td>{{address}}</td>
+        </tr>
+        <tr>
+          <td>City  </td>
+          
+          <td>{{city}}</td>
+        </tr>
+        <tr>
+          <td>State  </td>
+          
+          <td>{{state}}</td>
+        </tr>
+        <tr>
+          <td>Country  </td>
+          
+          <td>{{country}}</td>
+        </tr>
 
-    </form>
+      </table>
+    </div>
   </div>

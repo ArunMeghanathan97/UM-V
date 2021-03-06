@@ -14,7 +14,7 @@ export class AddService {
   constructor(private http: HttpClient) {
   }
 
-  save(list:string,param:any) {
+  callAPI(list:string,param:any) {
   
     const headerDict = {
       "Accept": "application/json" ,

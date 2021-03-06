@@ -2,9 +2,11 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 var baseUrl:any = document.getElementById("baseUrl");
+var backend:any = document.getElementById("backend");
 
 export const environment = {
   baseUrl : baseUrl.value,
+  backend : backend.value,
   production: false
 };
 
