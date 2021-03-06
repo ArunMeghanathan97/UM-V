@@ -1,0 +1,39 @@
+<div class="container">  
+    <form id="contact" action="#" method="post">
+      <h3>Add User Deetails</h3>
+      <fieldset>
+        <input placeholder="Your name" type="text" tabindex="1" [(ngModel)]="name" required autofocus>
+      </fieldset>
+      <fieldset>
+        <input placeholder="Your username" type="text" tabindex="1" [(ngModel)]="username" required autofocus>
+      </fieldset>
+      <fieldset>
+        <input placeholder="Your Email Address" type="email" tabindex="2" required [(ngModel)]="email">
+      </fieldset>
+      <fieldset>
+        <input placeholder="Your Phone Number " type="tel" tabindex="3" required [(ngModel)]="mobile">
+      </fieldset>
+      <fieldset>
+        <input placeholder="Your Date Of Birth " type="date" tabindex="4" required [(ngModel)]="dob">
+      </fieldset>
+      <fieldset>
+        <input placeholder="Your Photo" type="file" tabindex="4" required [(ngModel)]="name">
+      </fieldset>
+      <fieldset>
+        <textarea placeholder="Type your address here...." tabindex="5" required name="address"  [(ngModel)]="address">{{address}}</textarea>
+      </fieldset>
+      <fieldset>
+        <input placeholder="Your City" type="text" tabindex="1" required  [(ngModel)]="city">
+      </fieldset>
+      <fieldset>
+        <input placeholder="Your State" type="text" tabindex="1" required [(ngModel)]="state">
+      </fieldset>
+      <fieldset>
+        <input placeholder="Your Country" type="text" tabindex="1" required [(ngModel)]="country">
+      </fieldset>
+      <fieldset>
+        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+      </fieldset>
+
+    </form>
+  </div>

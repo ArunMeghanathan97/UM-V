@@ -17,6 +17,7 @@ export class IndexComponent implements OnInit {
     this.list();
   }
 
+
   list(){
 
     let me  = this;
