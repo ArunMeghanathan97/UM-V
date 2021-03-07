@@ -32,7 +32,7 @@
       </fieldset>
       <fieldset>
         <input placeholder="Your Photo" type="file" tabindex="4" required 
-          #fileInput (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)"
+          #fileInput  appDragDrop (onFileDropped)="uploadFile($event)"
           (change)="uploadFile($event.target.files)">
           <img src="{{imagesrc}}" width="50px" height="50px" *ngIf="this.imagesrc != ''" />
       </fieldset>

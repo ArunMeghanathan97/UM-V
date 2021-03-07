@@ -12,12 +12,14 @@ export class IndexComponent implements OnInit {
 
   page:string = "";
   llist:any   = [];
-
+  page_num:number = 1;
   sname:string = "";
   semail:string = "";
   smobile:string = "";
   sstate:string = "";
   sdob:string = "";
+
+  page_set:any          = {};
   baseUrl = environment.baseUrl;
 
   constructor(private indexService:IndexService,  private router: Router,
@@ -27,11 +29,34 @@ export class IndexComponent implements OnInit {
     this.list();
   }
 
+  previousClick(){
+
+    let me            = this;
+    if ( me.page_num > 1 ){
+      me.page_num         = me.page_num + 1;
+      me.list();
+    }else{
+      alert('Reached first page..!');
+    }
+
+  }
+
+  nextClick(){
+
+    let me            = this;
+    if ( me.page_set['total'] > me.page_set['now'] ){
+      me.page         = me.page + 1;
+      me.list();
+    }else{
+      alert('Reached last page..!');
+    }
+   
+  }
 
   list(){
 
     let me  = this;
-    let request:any = { page : 1 };
+    let request:any = { page : me.page_num };
 
     if ( this.sname != ""){
       request = { ...request, name : this.sname };
@@ -80,43 +105,26 @@ export class IndexComponent implements OnInit {
   }
 
   export(){
-    // let list:any = [];
-    // let me        = this;
-    // let hh:any    = [];
-    // list.push();
-    // this.convertToCsv('users.csv',this.llist);
 
-    let me  = this;
-    let request:any = { page : 1 , export : 1};
-
+    let me            = this;
+    let url:string    = me.baseUrl;
+    url               = url + "list?page="+me.page_num+"&export=1";
     if ( this.sname != ""){
-      request = { ...request, name : this.sname };
+      url = url +'&name='+this.sname;
     }
     if ( this.semail != ""){
-      request = { ...request, email : this.semail };
+      url = url +'&email='+this.semail;
     }
     if ( this.smobile != ""){
-      request = { ...request, mobile : this.smobile };
+      url = url +'&mobile='+this.smobile;
     }
     if ( this.sstate != ""){
-      request = { ...request, state : this.sstate };
+      url = url +'&state='+this.sstate;
     }
     if ( this.sdob != ""){
-      request = { ...request, dob : this.sdob };
+      url = url +'&dob='+this.sdob;
     }
-
-    me.indexService.triggerService('list',request).subscribe(
-      res => {
-        if ( res['error'] == false ){
-          me.page   = res['list']['page'];
-          me.llist  = res['list']['list'];
-        }
-      },
-      error => {
-
-      }
-      );
-
+    window.location.href = url;
   }
 
   delete(id:number){
@@ -136,46 +144,5 @@ export class IndexComponent implements OnInit {
     }
 
   }
-
-  convertToCsv(fName, rows) {
-    var csv = '';
-    for (var i = 0; i < rows.length; i++) {
-        var row = rows[i];
-        for (var j = 0; j < row.length; j++) {
-            var val = row[j] === null ? '' : row[j].toString();
-            val = val.replace(/\t/gi, " ");
-            if (j > 0)
-                csv += '\t';
-            csv += val;
-        }
-        csv += '\n';
-    }
-
-    // for UTF-16
-    var cCode, bArr = [];
-    bArr.push(255, 254);
-    for (var i = 0; i < csv.length; ++i) {
-        cCode = csv.charCodeAt(i);
-        bArr.push(cCode & 0xff);
-        bArr.push(cCode / 256 >>> 0);
-    }
-
-    var blob = new Blob([new Uint8Array(bArr)], { type: 'text/csv;charset=UTF-16LE;' });
-    if (navigator.msSaveBlob) {
-        navigator.msSaveBlob(blob, fName);
-    } else {
-        var link = document.createElement("a");
-        if (link.download !== undefined) {
-            var url = window.URL.createObjectURL(blob);
-            link.setAttribute("href", url);
-            link.setAttribute("download", fName);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(url);
-        }
-    }
-}
 
 }

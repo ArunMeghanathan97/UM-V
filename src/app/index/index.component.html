@@ -7,7 +7,13 @@
             </div>
         </div>
         <div class="col-sm-6" style="text-align: end;padding-right: 25px;">
-            {{page}}
+            <button class="mybtn" (click)="previousClick  ()">
+              <
+            </button> 
+            <label>{{page}}</label>
+            <button class="mybtn" (click)="nextClick()">
+              >
+            </button>
         </div>
     </div>
     <div class="row">
